@@ -36,10 +36,41 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
-const config_1 = __importDefault(require("../../../config"));
 const bcrypt = __importStar(require("bcrypt"));
 const prisma_1 = __importDefault(require("../../../shared/prisma"));
+const hashPasswordHelper_1 = require("../../../helpers/hashPasswordHelper");
 const jwtHelpers_1 = require("../../../helpers/jwtHelpers");
+const config_1 = __importDefault(require("../../../config"));
+const createAdmin = (payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const { name, email, password } = payload;
+    // Hash the password before storing it
+    const hashPassword = yield (0, hashPasswordHelper_1.hashedPassword)(payload.password);
+    const existingUser = yield prisma_1.default.admin.findFirst({
+        where: {
+            OR: [{ email }, { name }],
+        },
+    });
+    if (existingUser) {
+        throw new Error("User with the same email or username already exists");
+    }
+    // Create the admin within a transaction
+    const result = yield prisma_1.default.admin.create({
+        data: {
+            name,
+            email,
+            password: hashPassword,
+        },
+        select: {
+            id: true,
+            name: true,
+            email: true,
+            password: true,
+            createdAt: true,
+            updatedAt: true,
+        },
+    });
+    return result;
+});
 const loginUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const userData = yield prisma_1.default.admin.findFirstOrThrow({
         where: {
@@ -59,5 +90,6 @@ const loginUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     };
 });
 exports.AuthService = {
+    createAdmin,
     loginUser,
 };
