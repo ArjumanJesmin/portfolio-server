@@ -1,28 +1,22 @@
 import express from "express";
-import { userRoutes } from "../modules/user/user.route";
 import { AuthRoutes } from "../modules/auth/auth.routes";
-import { FlatRoutes } from "../modules/flat/route";
-import { FlatShareRoutes } from "../modules/FlatShare/route";
+import { ProjectRoutes } from "../modules/projects/project.route";
+import { BlogRoutes } from "../modules/blog/blog.route";
 
 const router = express.Router();
 
 const moduleRoutes = [
-  // ... routes
   {
     path: "/auth",
     route: AuthRoutes,
   },
   {
-    path: "/user",
-    route: userRoutes,
+    path: "/project",
+    route: ProjectRoutes,
   },
   {
-    path: "/flat",
-    route: FlatRoutes,
-  },
-  {
-    path: "/flatShare",
-    route: FlatShareRoutes,
+    path: "/blog",
+    route: BlogRoutes,
   },
 ];
 
