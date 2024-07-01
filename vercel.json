@@ -2,12 +2,13 @@
   "version": 2,
   "builds": [
     {
-      "src": "package.json",
+      "src": "dist/server.js",
       "use": "@vercel/node",
       "config": {
         "buildCommand": "npm run build"
       }
     }
   ],
+
   "rewrites": [{ "source": "/(.*)", "destination": "dist/server.js" }]
 }
