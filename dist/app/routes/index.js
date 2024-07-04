@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const auth_routes_1 = require("../modules/auth/auth.routes");
 const project_route_1 = require("../modules/projects/project.route");
 const blog_route_1 = require("../modules/blog/blog.route");
+const mail_route_1 = require("../modules/sendMail/mail.route");
 const router = express_1.default.Router();
 const moduleRoutes = [
     {
@@ -20,6 +21,10 @@ const moduleRoutes = [
     {
         path: "/blog",
         route: blog_route_1.BlogRoutes,
+    },
+    {
+        path: "/mail",
+        route: mail_route_1.MailRoutes,
     },
 ];
 moduleRoutes.forEach((route) => router.use(route.path, route.route));

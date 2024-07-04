@@ -8,7 +8,10 @@ import globalErrorHandler from "./app/middlewares/globalErrorHandler";
 const app: Application = express();
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: [
+      "http://localhost:3000",
+      "https://portfolio-client-steel.vercel.app/",
+    ],
     credentials: true,
   })
 );

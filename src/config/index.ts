@@ -10,4 +10,9 @@ export default {
     jwt_secret: process.env.JWT_SECRET,
     expires_in: process.env.EXPIRES_IN,
   },
+  mail: {
+    email_host: process.env.EMAIL_HOST,
+    email_user: process.env.EMAIL_USER,
+    email_pass: process.env.EMAIL_PASS,
+  },
 };

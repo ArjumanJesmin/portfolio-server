@@ -26,6 +26,8 @@ model Project {
   liveLink         String
   githubLink       String
   githubServerLink String
+  features         String[]
+  technologies     String[]
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 
@@ -41,4 +43,14 @@ model Blog {
   updatedAt DateTime @updatedAt
 
   @@map("blogs")
+}
+
+model EmailLog {
+  id        Int      @id @default(autoincrement())
+  to        String
+  subject   String
+  message   String
+  createdAt DateTime @default(now())
+
+  @@map("emailLog")
 }
